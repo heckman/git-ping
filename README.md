@@ -1,6 +1,6 @@
 # git-ping
 
-Test if git repository is available at given URL.
+Test if git repository is available at a given URL.
 
 ## Usage
 
@@ -10,7 +10,7 @@ usage: git ping URL
 Returns a zero exit code if a git repository is found at the URL.
 Produces no output.
 
-Returns with non-zero exit code if the repository is
+Returns with a non-zero exit code if the repository is
 not found or if the URL responds with a prompt for credentials.
 Prompts will be suppressed. (Produces no output.)
 
@@ -28,7 +28,8 @@ will ping the URL 'https://github.com/heckman/git-ping'
 
 ## Installation
 
-This script can be run from anywhere.
+This script is in the bin directory. Put it on your system,
+on the path is good—but it can be run from anywhere.
 
 Set the `GIT_HOST` and `GIT_USER` environment variables to change the defaults,
 or just edit the script.

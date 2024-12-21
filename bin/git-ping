@@ -3,19 +3,20 @@
 # https://git.heckman.ca/git-ping  SPDX-License-Identifier: MIT
 
 
-# git-ping  v0.1
+# git-ping  v0.2
 
 
 # test if git repository is available at given URL
 
-# usage: git ping URL
+# usage: git ping [-v|--verbose] URL
 #
 # Returns a zero exit code if a git repository is found at the URL.
-# Produces no output.
+# Produces no output unless verbose mode is enabled.
 #
 # Returns with non-zero exit code if the repository is
 # not found or if the URL responds with a prompt for credentials.
-# Prompts will be suppressed. (Produces no output.)
+# Prompts will be suppressed. Produces no output unless verbose
+# mode is enabled, which nevertheless gives no feedback prompts.
 #
 # If the URL does not begin with a URL scheme,
 # then a default base URL will be prepended,
@@ -34,6 +35,13 @@ default_user="${GIT_USER:-heckman}"
 # if you change these in such a way that they ignore the
 # environment variables then please update the usage text above.
 
+verbose=false
+if [ "$1" = "-v" ] || [ "$1" = "--verbose" ]
+then
+	verbose=true
+	shift
+fi
+
 case "$1" in
 *://*) URL="$1";;
 */*) URL="$default_host/$1";;
@@ -41,3 +49,16 @@ case "$1" in
 esac
 
 GIT_TERMINAL_PROMPT=0 >/dev/null 2>&1 git ls-remote --exit-code "$URL"
+result=$?
+
+if [ $verbose = true ]
+then
+	if [ $result -eq 0 ]
+	then
+		echo "[Ping OK]: $URL"
+	else
+		echo "[Ping FAIL]: $URL"
+	fi
+fi
+
+exit $result

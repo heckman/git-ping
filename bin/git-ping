@@ -1,12 +1,12 @@
 #!/bin/sh
 # Copyright 2024 Erik Ben Heckman <erik@heckman.ca>
-# https://git.heckman.ca/git-ping  SPDX-License-Identifier: MIT
+# https://git.heckman.ca/git-ping   SPDX-License-Identifier: MIT
 
 
-# git-ping  v0.2
+#  git-ping  v0.2
 
 
-# test if git repository is available at given URL
+# Test if a git repository is available at given URL
 
 # usage: git ping [-v|--verbose] URL
 #
@@ -28,6 +28,7 @@
 #
 # Example: `GIT_HOST=https://github.com GIT_USER=heckman git ping git-ping`
 # will ping the URL 'https://github.com/heckman/git-ping'
+#
 
 # you can set the default defaults here:
 default_host="${GIT_HOST:-https://github.com}"
